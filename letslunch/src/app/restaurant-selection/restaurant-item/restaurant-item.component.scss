@@ -1,6 +1,21 @@
+@import '../../../assets/sass/variables.scss';
+
 .restaurant-item-container {
     .item-name {
         color: white;
         font-size: 1.25vw;
+    }
+
+    .percent-container {
+        width: 100%;
+        height: 2px;
+
+        .percent-inner {
+            width: 100%;
+            max-width: 0%;;
+            height: 2px;
+            background-color: $teal;
+            transition: max-width 0.3s;
+        }
     }
 }

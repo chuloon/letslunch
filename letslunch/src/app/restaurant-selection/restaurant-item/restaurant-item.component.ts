@@ -19,4 +19,8 @@ export class RestaurantItemComponent implements OnInit {
     this.voteShare = value;
   }
 
+  getSharePercentage = () => {
+    return this.selectionService.totalVotes != 0 ? this.voteShare / this.selectionService.totalVotes * 100 + "%" : "0%";
+  }
+
 }

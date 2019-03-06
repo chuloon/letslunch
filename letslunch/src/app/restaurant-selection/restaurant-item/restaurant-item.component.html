@@ -1,5 +1,9 @@
 <div class="restaurant-item-container">
   <div class="item-name">
-    <mat-checkbox (change)="selectionService.restaurantItemChange($event, voteShare, setVoteShare)">{{ name }} {{ selectionService.totalVotes != 0 ? voteShare / selectionService.totalVotes * 100 + "%" : "0%" }}</mat-checkbox>
+    <mat-checkbox (change)="selectionService.restaurantItemChange($event, voteShare, setVoteShare)">{{ name }}</mat-checkbox>
+  </div>
+  <div class="percent-container">
+    <div class="percent-inner" [ngStyle]="{ 'max-width': getSharePercentage() }">
+    </div>
   </div>
 </div>
