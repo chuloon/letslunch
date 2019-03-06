@@ -1,1 +1,19 @@
-/* You can add global styles to this file, and also import other style files */
+@import '../src/assets/sass/variables.scss';
+// @import '../src/assets/sass/custom-theme.scss';
+@import "~@angular/material/prebuilt-themes/purple-green.css";
+
+// Fonts
+@font-face {
+    font-family: 'headline';
+    src: url('../src/assets/fonts/LemonMilk.otf') format('opentype');
+}
+@font-face {
+    font-family: 'normal';
+    src: url('../src/assets/fonts/Roboto-Regular.ttf');
+}
+
+body {
+    background-color: $black;
+    margin: 0px;
+    font-family: normal;
+}
