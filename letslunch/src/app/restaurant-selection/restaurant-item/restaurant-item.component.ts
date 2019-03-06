@@ -15,6 +15,8 @@ export class RestaurantItemComponent implements OnInit {
   ngOnInit() {
   }
 
-
+  setVoteShare = (value) => {
+    this.voteShare = value;
+  }
 
 }
