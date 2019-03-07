@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { SelectionService } from '../services/selection.service';
 
 @Component({
@@ -9,6 +9,7 @@ import { SelectionService } from '../services/selection.service';
 export class RestaurantItemComponent implements OnInit {
   @Input() name: string;
   @Input() voteShare: number;
+  @Output() voteChange: EventEmitter<any> = new EventEmitter();
 
   constructor(public selectionService: SelectionService) { }
 
@@ -17,6 +18,7 @@ export class RestaurantItemComponent implements OnInit {
 
   setVoteShare = (value) => {
     this.voteShare = value;
+    this.voteChange.emit({ name: this.name, voteShare: value });
   }
 
   getSharePercentage = () => {

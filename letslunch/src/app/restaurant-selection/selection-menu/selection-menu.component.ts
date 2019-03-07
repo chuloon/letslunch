@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { SelectionService } from '../services/selection.service';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-selection-menu',
@@ -14,11 +16,39 @@ export class SelectionMenuComponent implements OnInit {
     new Restaurant("Jimmy John's", 0),
     new Restaurant("Pizza Hut", 0),
     new Restaurant("Nada", 0)
-  ]
+  ];
 
-  constructor() { }
+  showAddRestaurantField: boolean = false;
+  addRestaurantName: string = "";
+
+  constructor(public selectionService: SelectionService) { }
 
   ngOnInit() {
+  }
+
+  addRestaurantButtonClick = () => {
+    this.showAddRestaurantField = true;
+    setTimeout(() => {
+      document.getElementById("add-field-textbox").focus();
+    }, 10);
+  }
+
+  addRestaurant = () => {
+    if(this.addRestaurantName == "") return;
+
+    this.restaurants.push(new Restaurant(this.addRestaurantName, 0));
+    this.addRestaurantName = "";
+    this.showAddRestaurantField = false;
+  }
+
+  changeVote = (event) => {
+    const restaurantIndex = this.findRestaurantIndex(event.name);
+
+    this.restaurants[restaurantIndex].voteShare = event.voteShare;
+  }
+
+  findRestaurantIndex = (name: string) => {
+    return _.findIndex(this.restaurants, (o) => { return o.name == name });
   }
 }
 

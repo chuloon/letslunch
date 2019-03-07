@@ -1,5 +1,16 @@
 <div id="menu-container">
   <div class="restaurant-item" *ngFor="let item of restaurants">
-    <restaurant-item [name]="item.name" [voteShare]="item.voteShare"></restaurant-item>
+    <restaurant-item [name]="item.name" [voteShare]="item.voteShare" (voteChange)="changeVote($event)"></restaurant-item>
+    <div class="vote-count">
+      {{ item.voteShare }} / {{ selectionService.totalVotes }}
+    </div>
+  </div>
+  <div id="add-new-restaurant" class="restaurant-item" (click)="addRestaurantButtonClick()">
+    <div id="add-button" [ngClass]="{'visible': !showAddRestaurantField}">
+      <img src="../../../assets/img/add.png" /> Add Restaurant...
+    </div>
+    <div id="add-field" [ngClass]="{'visible': showAddRestaurantField}">
+      <input id="add-field-textbox" type="text" [(ngModel)]="addRestaurantName" (keydown.enter)="addRestaurant()"><button type="button" (click)="addRestaurant()">Add</button>
+    </div>
   </div>
 </div>
