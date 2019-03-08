@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SelectionService } from '../services/selection.service';
 import * as _ from 'lodash';
+import { AngularFirestore } from 'angularfire2/firestore';
 
 @Component({
   selector: 'app-selection-menu',
@@ -8,20 +9,12 @@ import * as _ from 'lodash';
   styleUrls: ['./selection-menu.component.scss']
 })
 export class SelectionMenuComponent implements OnInit {
-  restaurants: Restaurant[] = [
-    new Restaurant("McDonald's", 0),
-    new Restaurant("Burger King", 0),
-    new Restaurant("Taco Bell", 0),
-    new Restaurant("Chipotle", 0),
-    new Restaurant("Jimmy John's", 0),
-    new Restaurant("Pizza Hut", 0),
-    new Restaurant("Nada", 0)
-  ];
+  restaurants: Restaurant[] = [];
 
   showAddRestaurantField: boolean = false;
   addRestaurantName: string = "";
 
-  constructor(public selectionService: SelectionService) { }
+  constructor(public selectionService: SelectionService, private db: AngularFirestore) { }
 
   ngOnInit() {
   }
@@ -34,11 +27,23 @@ export class SelectionMenuComponent implements OnInit {
   }
 
   addRestaurant = () => {
-    if(this.addRestaurantName == "") return;
+    if (this.addRestaurantName == "") return;
 
     this.restaurants.push(new Restaurant(this.addRestaurantName, 0));
-    this.addRestaurantName = "";
-    this.showAddRestaurantField = false;
+
+    if (this.selectionService.sessionId != "") {
+      this.db.collection("sessions").doc(this.selectionService.sessionId).set({ restaurants: JSON.stringify(this.restaurants) }).then((result) => {
+        this.addRestaurantName = "";
+        this.showAddRestaurantField = false;
+      });
+    }
+    else {
+      this.db.collection("sessions").add({ restaurants: JSON.stringify(this.restaurants) }).then((result) => {
+        this.selectionService.sessionId = result.id;
+        this.addRestaurantName = "";
+        this.showAddRestaurantField = false;
+      });
+    }
   }
 
   changeVote = (event) => {
@@ -56,5 +61,5 @@ class Restaurant {
   constructor(public name: string, public voteShare: number = 0) {
     this.name = name;
     this.voteShare = voteShare;
-   }
+  }
 }

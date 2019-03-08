@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class SelectionService {
+  sessionId: string = "";
   totalVotes: number = 0;
 
   constructor() { }
