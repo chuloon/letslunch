@@ -5,6 +5,9 @@ import { HomeComponent } from './home-page/home/home.component';
 const routes: Routes = [
   {
     path: '', component: HomeComponent
+  },
+  {
+    path: ':sessionId', component: HomeComponent
   }
 ];
 

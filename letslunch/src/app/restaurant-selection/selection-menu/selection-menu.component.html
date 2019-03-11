@@ -1,5 +1,5 @@
 <div id="menu-container">
-  <div class="restaurant-item" *ngFor="let item of restaurants">
+  <div class="restaurant-item" *ngFor="let item of selectionService.restaurants">
     <restaurant-item [name]="item.name" [voteShare]="item.voteShare" (voteChange)="changeVote($event)"></restaurant-item>
     <div class="vote-count">
       {{ item.voteShare }} / {{ selectionService.totalVotes }}

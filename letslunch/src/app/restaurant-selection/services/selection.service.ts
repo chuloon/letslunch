@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { AngularFirestore } from 'angularfire2/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -6,8 +7,9 @@ import { Injectable } from '@angular/core';
 export class SelectionService {
   sessionId: string = "";
   totalVotes: number = 0;
+  restaurants: Restaurant[] = [];
 
-  constructor() { }
+  constructor(private db: AngularFirestore) { }
 
   restaurantItemChange = (event, voteShare: number, setShareFunction) => {
     if(event.checked) {
@@ -18,7 +20,17 @@ export class SelectionService {
       this.totalVotes--;
       voteShare--;
     }
-
     setShareFunction(voteShare);
+  }
+
+  setRestaurantSession = () => {
+    this.db.collection("sessions").doc(this.sessionId).set({ restaurants: JSON.stringify(this.restaurants), totalVotes: this.totalVotes });
+  }
+}
+
+export class Restaurant {
+  constructor(public name: string, public voteShare: number = 0) {
+    this.name = name;
+    this.voteShare = voteShare;
   }
 }
