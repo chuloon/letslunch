@@ -5,9 +5,10 @@ import { RestaurantSelectionModule } from '../restaurant-selection/restaurant-se
 import { AngularFireModule } from 'angularfire2';
 import { environment } from 'src/environments/environment';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { CurrentLeaderComponent } from './current-leader/current-leader.component';
 
 @NgModule({
-  declarations: [HomeComponent],
+  declarations: [HomeComponent, CurrentLeaderComponent],
   imports: [
     CommonModule,
     RestaurantSelectionModule,

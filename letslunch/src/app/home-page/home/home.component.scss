@@ -4,11 +4,22 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding-left: 15px;
+    padding-right: 15px;
 
     .title {
         color: $teal;
         font-family: headline;
         text-align: center;
-        font-size: 5vw;
+        font-size: 80px;
     }
+}
+
+#leader-home-container {
+    text-align: center;
+    position: absolute;
+    bottom: 50px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
 }

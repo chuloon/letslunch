@@ -6,9 +6,7 @@ const routes: Routes = [
   {
     path: '', component: HomeComponent
   },
-  {
-    path: ':sessionId', component: HomeComponent
-  }
+  { path: 'session/:sessionId', component: HomeComponent }
 ];
 
 @NgModule({

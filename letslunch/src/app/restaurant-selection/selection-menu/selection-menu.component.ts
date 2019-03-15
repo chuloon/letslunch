@@ -30,17 +30,18 @@ export class SelectionMenuComponent implements OnInit {
 
     this.selectionService.restaurants.push(new Restaurant(this.addRestaurantName, 0));
 
+
     if (this.selectionService.sessionId != "") {
-      this.db.collection("sessions").doc(this.selectionService.sessionId).set({ restaurants: JSON.stringify(this.selectionService.restaurants) }).then((result) => {
-        this.addRestaurantName = "";
-        this.showAddRestaurantField = false;
-      });
+      this.selectionService.setRestaurantSession();
+      this.addRestaurantName = "";
     }
     else {
       this.db.collection("sessions").add({ restaurants: JSON.stringify(this.selectionService.restaurants) }).then((result) => {
         this.selectionService.sessionId = result.id;
         this.addRestaurantName = "";
         this.showAddRestaurantField = false;
+
+        history.pushState(null, "Let's Lunch!", '/session/' + this.selectionService.sessionId);
       });
     }
   }
@@ -49,7 +50,6 @@ export class SelectionMenuComponent implements OnInit {
     const restaurantIndex = this.findRestaurantIndex(event.name);
 
     this.selectionService.restaurants[restaurantIndex].voteShare = event.voteShare;
-
     this.selectionService.setRestaurantSession();
   }
 

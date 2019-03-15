@@ -1,0 +1,11 @@
+<div id="current-leader-container">
+  <div class="header">
+    we're currently going to lunch at:
+  </div>
+  <div class="name">
+    {{ selectionService.leader.name }}
+  </div>
+  <div class="votes">
+    with {{ selectionService.leader.voteShare }} {{ selectionService.leader.voteShare == 1 ? 'vote' : 'votes' }}
+  </div>
+</div>
