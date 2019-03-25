@@ -6,5 +6,18 @@
   <app-selection-menu></app-selection-menu>
 </div>
 <div id="leader-home-container" *ngIf="showLeader()">
-    <app-current-leader></app-current-leader>
+  <div class="new-session-container">
+
+  </div>
+
+  <app-current-leader></app-current-leader>
+</div>
+
+<div id="nav-container">
+  <div class="new-session" (click)="createNewSession()">
+    <img alt="New Session" src="../../../assets/svg/new.svg" matTooltip="Create a new session">
+  </div>
+  <div class="share-session" (click)="shareSession()">
+    <img alt="Share Session" src="../../../assets/svg/share.svg" matTooltip="Share current session">
+  </div>
 </div>

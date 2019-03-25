@@ -32,7 +32,7 @@ export class SelectionService {
   setRestaurantSession = () => {
     const saveObject = { restaurants: JSON.stringify(this.restaurants), totalVotes: this.totalVotes };
 
-    localStorage.setItem("letsLunchSession", JSON.stringify(saveObject));
+    localStorage.setItem("letsLunchSession-" + this.sessionId, JSON.stringify(saveObject));
     this.db.collection("sessions").doc(this.sessionId).set(saveObject).then((result) => {
       this.calculateLeader();
     });

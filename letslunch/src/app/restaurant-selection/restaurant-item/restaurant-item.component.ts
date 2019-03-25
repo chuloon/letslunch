@@ -20,7 +20,7 @@ export class RestaurantItemComponent implements OnInit {
   }
 
   setSelectedState = () => {
-    const storedSelectedRestaurantData = localStorage.getItem("selectedRestaurants");
+    const storedSelectedRestaurantData = localStorage.getItem("selectedRestaurants-" + this.selectionService.sessionId);
     
     if(storedSelectedRestaurantData) {
       const selectedRestaurantData: string[] = JSON.parse(storedSelectedRestaurantData);
@@ -40,7 +40,7 @@ export class RestaurantItemComponent implements OnInit {
     else {
       _.remove(this.selectionService.selectedRestaurants, (n) => { return n == this.name });
     }
-    localStorage.setItem("selectedRestaurants", JSON.stringify(this.selectionService.selectedRestaurants));
+    localStorage.setItem("selectedRestaurants-" + this.selectionService.sessionId, JSON.stringify(this.selectionService.selectedRestaurants));
 
     this.voteChange.emit({ name: this.name, voteShare: value });
   }
